@@ -1,0 +1,33 @@
+string removeReverse(string s) {
+        
+        vector<int>v(26,0);
+        for(auto x : s)
+            v[x-'a']++;
+        int l=0,r=s.size()-1;
+        bool flag=true;
+        while(l<r)
+        {
+            if (flag){
+                if (v[s[l]-'a']>1){
+                    v[s[l]-'a']--;
+                    s[l]='0';
+                    flag^=1;
+                } ++l;
+            }else{
+               if (v[s[r]-'a']>1){
+                    v[s[r]-'a']--;
+                    s[r]='0';
+                    flag^=1;
+                } --r; 
+            }
+        }
+        string ans;
+        if (!flag)
+            reverse(s.begin(),s.end());
+        for(auto x : s){
+            if (x!='0')
+                ans+=x;
+        }
+        return ans;
+        
+}

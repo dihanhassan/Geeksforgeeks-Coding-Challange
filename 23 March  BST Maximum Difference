@@ -1,0 +1,34 @@
+ int  tot,ans,tar;
+    const int mxn = -1e9;
+    void BST (Node *root , int sum,bool flag)
+    {
+        if (root==NULL){
+            
+            return;
+        }
+        sum+=root->data;
+        if (root->data==tar){
+            flag=true;
+            tot=sum-root->data;
+            sum=0;
+        }
+        if (root->left==NULL and root->right==NULL){
+            if (flag){
+                ans=max(ans,tot-sum);
+            }
+        }
+        BST(root->left,sum,flag);
+        BST(root->right,sum,flag);
+            
+    }
+
+    int maxDifferenceBST(Node *root,int target){
+        
+        ans=mxn;
+        tar=target;
+        BST(root,0,false);
+        if (ans==mxn)
+            ans=-1;
+        return ans;
+        
+ }
